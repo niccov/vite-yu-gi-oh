@@ -10,8 +10,13 @@ export default {
     data() {
         return {
             store,
-            CardsElements,
         }
+
+        
+    },
+
+    components:{
+        CardsElements,
     },
 
     created() {
@@ -26,10 +31,19 @@ export default {
 
 <template>
     <div>
-        <div id="Cards">
-            <CardsElements></CardsElements>
+        <div id="cards">
+            <CardsElements v-for="card in store.cards" :cards="card"></CardsElements>
         </div>
     </div>
 </template> 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+#cards{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 20px;
+
+    padding: 20px;
+}
+</style>

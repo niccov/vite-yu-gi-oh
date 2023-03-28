@@ -10,7 +10,18 @@ export default{
 </script>
 
 <template>
-    <div></div>
+    <div>
+        <h1>YU-GI-OH CARDS</h1>
+    </div>
 </template> 
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+
+h1{
+    text-align: center;
+
+    font-size: 45px;
+
+    color: red;
+}
+</style>
