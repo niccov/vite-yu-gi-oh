@@ -1,10 +1,14 @@
 <script>
 
+import CardsElements from "./CardsElements.vue"
+
+import CardSearch from "./CardSearch.vue"
+
 import axios from "axios"
 
 import {store} from "../store.js";
 
-import CardsElements from "./CardsElements.vue"
+
 
 export default {
     data() {
@@ -17,20 +21,37 @@ export default {
 
     components:{
         CardsElements,
+        CardSearch,
     },
 
     created() {
-        axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=50&offset=0').then((res) => {
+        axios.get(this.store.APIcall).then((res) => {
             console.log(res.data.data);
 
             this.store.cards = res.data.data;
         })
+    },
+
+    methods: {
+        search() {
+            let apiNewString = this.store.APIcall + this.store.APIquery + this.store.CardName;
+
+            axios.get(apiNewString).then((res) => {
+                console.log(res.data.data);
+
+                this.store.cards =res.data.data;
+            })
+        }
     }
 }
 </script>
 
 <template>
     <div>
+        <div>
+            <CardSearch @searchCardName="search()"></CardSearch>
+        </div>
+
         <div id="cards">
             <CardsElements v-for="card in store.cards" :cards="card"></CardsElements>
         </div>
